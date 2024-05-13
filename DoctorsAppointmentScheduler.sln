@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34009.444
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorsAppointmentScheduler.Api", "DoctorsAppointmentScheduler.Api\DoctorsAppointmentScheduler.Api.csproj", "{F93E7E8A-52B3-4C9D-BC5F-E83FD43DA9DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorsAppointmentScheduler.Data", "DoctorsAppointmentScheduler.Data\DoctorsAppointmentScheduler.Data.csproj", "{9C13A1F1-DD0F-401A-B35E-84896825E7AB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorsScheduler", "DoctorsScheduler\DoctorsScheduler.csproj", "{4E8632A8-F584-44DA-B242-EE56F19A01F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorsAppointmentScheduler.DTO", "DoctorsAppointmentScheduler.DTO\DoctorsAppointmentScheduler.DTO.csproj", "{6794A9B6-5BC4-40F5-9E0B-0582D3008A54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorsAppointmentScheduler.ConsoleApp", "DoctorsAppointmentScheduler.Console\DoctorsAppointmentScheduler.ConsoleApp.csproj", "{60828D64-2621-466F-9AC9-DE280D695F28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{670D9623-D0E5-45DC-AE46-EE5A9416FA9D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F93E7E8A-52B3-4C9D-BC5F-E83FD43DA9DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F93E7E8A-52B3-4C9D-BC5F-E83FD43DA9DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F93E7E8A-52B3-4C9D-BC5F-E83FD43DA9DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F93E7E8A-52B3-4C9D-BC5F-E83FD43DA9DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C13A1F1-DD0F-401A-B35E-84896825E7AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C13A1F1-DD0F-401A-B35E-84896825E7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C13A1F1-DD0F-401A-B35E-84896825E7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C13A1F1-DD0F-401A-B35E-84896825E7AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E8632A8-F584-44DA-B242-EE56F19A01F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E8632A8-F584-44DA-B242-EE56F19A01F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E8632A8-F584-44DA-B242-EE56F19A01F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E8632A8-F584-44DA-B242-EE56F19A01F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6794A9B6-5BC4-40F5-9E0B-0582D3008A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6794A9B6-5BC4-40F5-9E0B-0582D3008A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6794A9B6-5BC4-40F5-9E0B-0582D3008A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6794A9B6-5BC4-40F5-9E0B-0582D3008A54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60828D64-2621-466F-9AC9-DE280D695F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60828D64-2621-466F-9AC9-DE280D695F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60828D64-2621-466F-9AC9-DE280D695F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60828D64-2621-466F-9AC9-DE280D695F28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {227EB635-04D8-4082-A7B0-9D2A3BBFD124}
+	EndGlobalSection
+EndGlobal

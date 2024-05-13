@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DoctorsAppointmentScheduler.DTO.DoctorSpecialityDTO>
+@if (Model != null && Model.Any())
+{
+    <form asp-action="GetAllAvailableDates" asp-controller="Patient" method="get" class="d-flex" autocomplete="off">
+        <div class="flex-grow-1 me-2">
+            <label for="doctorSearch" class="form-label">Search Doctor:</label>
+            <div class="input-group">
+                <input type="text" list="doctors" id="doctorSearch" class="form-control" placeholder="Search for a doctor..." oninput="handleInput()">
+                    <datalist id="doctors">
+                        @foreach (var doctor in Model)
+                        {
+                            <option value="@doctor.DoctorName" data-id="@doctor.Id"></option>
+                        }
+                    </datalist>
+            </div>
+        </div>
+        <input type="hidden" id="selectedDoctorId" name="selectedDoctorId" />
+        <button type="submit" class="btn btn-primary mt-2" id="availableDatesButton" disabled>Available Dates</button>
+    </form>
+}
+
+
+
+<script>
+    function handleInput() {
+        var input = document.getElementById('doctorSearch');
+        var datalist = document.getElementById('doctors');
+        var selectedOption = Array.from(datalist.options).find(option => option.value.includes(input.value));
+        var selectedId = selectedOption ? parseInt(selectedOption.getAttribute('data-id'), 10) : null;
+        document.getElementById('selectedDoctorId').value = selectedId ? selectedId.toString() : '';
+        var button = document.getElementById('availableDatesButton');
+        button.disabled = !selectedId;
+    } 
+</script>
+

@@ -1,0 +1,25 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DoctorsAppointmentScheduler.Models.LoginViewModel
+<h2>Login</h2>
+<form asp-action="" asp-controller="MedicalStaffLogin" method="post">
+    <div>
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+        <span asp-validation-for="Username"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <button type="submit">Login</button>
+</form>
+
+<div>
+    <a asp-action="ForgotPassword" asp-controller="MedicalStaffLogin">Forgot Password?</a>
+</div>
+

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DateTime>
+@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "DoctorsIndex";
+}
+@{
+    ViewData["Title"] = "Leave";
+}
+@{
+    DateTime tomorrow = DateTime.Today.AddDays(1);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Mark Leave</title>
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Mark Leave</h1>
+    <div>
+        <form id="leaveForm" asp-action="MarkLeave" asp-controller="Doctor" method="post">
+            <label for="leaveDate">Select Leave Date:</label>
+            <input type="text" id="leaveDate" name="leaveDate" placeholder="Select date..." required readonly="readonly">
+
+            <button id="markLeaveBtn" type="submit" >Mark as Leave</button>
+        </form>
+    </div>
+    <div>
+        <div>
+            <h4>Marked Leave</h4>
+            <ul>
+                @if (Model.Count() == 0)
+                {
+                   
+                        <li colspan="5">No dates marked</li>
+                   
+                }
+                @foreach (var date in Model)
+                {
+                    <li style="list-style-type: none; margin-bottom: 5px;">@date.ToString("yyyy-MM-dd")</li>
+                }
+            </ul>
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            flatpickr("#leaveDate", {
+                minDate: "@tomorrow.ToString("yyyy-MM-dd")",
+                dateFormat: "Y-m-d",
+                mode: "single",
+                enable: [{ from: "@tomorrow.ToString("yyyy-MM-dd")", to: new Date().getFullYear() + 1 + '-12-31' }],
+                onChange: function (selectedDates, dateStr) {
+                    const markLeaveBtn = document.getElementById("markLeaveBtn");
+                    if (dateStr) {
+                       
+                        const hiddenInput = document.createElement("input");
+                        hiddenInput.type = "hidden";
+                        hiddenInput.name = "selectedDate";
+                        hiddenInput.value = dateStr;
+                        document.getElementById("leaveForm").appendChild(hiddenInput);
+                    } 
+                }
+            });
+        });
+    </script>
+</body>
+</html>

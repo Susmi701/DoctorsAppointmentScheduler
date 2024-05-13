@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "PatientIndex";
+}
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+@model IEnumerable<DoctorsAppointmentScheduler.DTO.DoctorSpecialityDTO>
+
+@using (Html.BeginForm("GetAllDoctors", "Patient", FormMethod.Get, new { id = "getDoctorsForm" }))
+{
+    @Html.DropDownList("SpecialtyId", (SelectList)ViewBag.Specialties, "Select Specialty", new { @id = "specialty" })
+    <input type="submit" value="Get Doctors" />
+}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<div id="doctorsContainer">
+</div>
+@if (TempData.ContainsKey("SuccessMessageForBooking"))
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessageForBooking"]
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $("#getDoctorsForm").submit(function (e) {
+            e.preventDefault();
+
+            var selectedSpecialtyId = $("#specialty").val();
+
+            $.ajax({
+                type: "GET",
+                url: "/Patient/GetAllDoctors",
+                data: { specialtyId: selectedSpecialtyId },
+                success: function (data) {
+                    $("#doctorsContainer").html(data);
+                },
+                error: function () {
+                    console.error("Error retrieving doctors");
+                }
+            });
+        });
+    });
+    setTimeout(function () {
+        $('.alert').fadeOut('slow');
+    }, 3000);
+</script>

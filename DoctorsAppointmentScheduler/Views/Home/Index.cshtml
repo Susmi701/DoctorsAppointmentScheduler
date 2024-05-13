@@ -1,0 +1,16 @@
+﻿
+
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+<h1>Welcome to the Appointment Scheduler</h1>
+
+<form asp-controller="Home" asp-action="SelectRole" method="post">
+    <label>Select your role:</label>
+    <select name="role">
+        <option value="medicalStaff">Medical Staff</option>
+        <option value="patient">Patient</option>
+    </select>
+    <button type="submit">Submit</button>
+</form>

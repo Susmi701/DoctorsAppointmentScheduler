@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "HomeIndex";
+}
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Role</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Optional: Custom styles for the form */
+        .form-container {
+            max-width: 1000px;
+            margin: 50px auto; /* Center the form */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+            .form-container label {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .form-container input[type="radio"] {
+                margin-right: 10px;
+            }
+
+            .form-container button[type="submit"] {
+                margin-top: 10px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">        
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="form-container">
+                    <form asp-action="SelectRole" asp-controller="Home" method="post">
+                        <div class="mb-3">
+                            <label>Select Role:</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="medicalStaff" name="role" value="medicalStaff">
+                                <label class="form-check-label" for="medicalStaff">Medical Staff</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="patient" name="role" value="patient">
+                                <label class="form-check-label" for="patient">Patient</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submitButton" disabled>Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const radioButtons = document.querySelectorAll('input[name="role"]');
+            const submitButton = document.getElementById("submitButton");
+
+            radioButtons.forEach(radio => {
+                radio.addEventListener("change", function () {
+                    submitButton.disabled = false;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

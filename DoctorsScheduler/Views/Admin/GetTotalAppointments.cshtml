@@ -1,0 +1,95 @@
+﻿
+@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "AdminIndex";
+}
+@{
+    ViewData["Title"] = "Appointment History";
+}
+@model IEnumerable<DoctorsAppointmentScheduler.DTO.AppointmentHistoryDTO>
+
+<form method="get" asp-action="TotalAppointmentsOverAPeriod" asp-controller="Admin" onsubmit="return validateDates()">
+    <label for="fromDate">From Date:</label>
+    <input type="date" id="fromDate" name="fromDate" required>
+
+    <label for="toDate">To Date:</label>
+    <input type="date" id="toDate" name="toDate" required>
+
+    <button type="submit" id="searchButton" >Search</button>
+</form>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchButton = document.getElementById("searchButton");
+        const fromDateInput = document.getElementById("fromDate");
+        const toDateInput = document.getElementById("toDate");
+
+        function validateDates() {
+            const fromDate = fromDateInput.value;
+            const toDate = toDateInput.value;
+        }
+
+        fromDateInput.addEventListener("change", validateDates);
+        toDateInput.addEventListener("change", validateDates);
+    });
+</script>
+<table>
+    <thead>
+        <tr>
+            <th>Doctor</th>
+            <th>Patient</th>
+            <th>Date Of Booking</th>
+            <th>Selected Date</th>
+            <th>Time Slot</th>
+            <th>Status</th>
+
+        </tr>
+    </thead>
+    
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="5">No records found</td>
+            </tr>
+        }
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>Dr. @appointment.DoctorName</td>
+                <td> @appointment.PatientName</td>
+                <td>@appointment.Created_Date.ToString("yyyy-MM-dd")</td>
+                <td>@appointment.Selected_Date.ToString("yyyy-MM-dd")</td>
+                <td>@appointment.TimeSlot.ToString(" HH:mm")</td>
+                <td id="status">@appointment.Status</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a type="button" class="btn btn-light" href="@Url.Action("Index", "Admin")" style="display:inline">Back</a>
+</div>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th {
+        background-color: #f2f2f2;
+        padding: 8px;
+        text-align: left;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+    }
+        td:first-child {
+            font-weight: 500;
+        }
+
+</style>

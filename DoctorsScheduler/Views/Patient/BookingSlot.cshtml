@@ -1,0 +1,107 @@
+﻿
+@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "PatientIndex";
+}
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+@model DoctorsAppointmentScheduler.DTO.AvailableDateDTO 
+
+<form asp-action="BookingSlot" asp-controller="Patient" method="get">
+    <input type="hidden" id="doctorId" name="doctorId" value="@Model.DoctorId" />
+    <div id="dateTimeSelection" style="display: flex; flex-wrap: wrap;">
+        <div class="date-time-box-container">
+            
+            <div class="time-slot-boxes">
+                @if (Model.Date.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="5">No records found</td>
+                    </tr>
+                }
+                @foreach (var timeSlot in Model.Date)
+                {
+                    <div class="time-slot-box" data-time="@timeSlot">@timeSlot.ToString("HH:mm")</div>
+                }
+            </div>
+        </div>
+        <input type="hidden" id="selectedDateTime" name="selectedDateTime" />
+        <button type="submit" id="searchButton" style="display:inline; margin-top:20px;  margin-bottom: 20px; margin-right:10px;" disabled>Book</button>
+        <p></p>
+        <a type="button" class="btn btn-light" href="#" onclick="window.history.back()" style="display:inline;  margin-top:25px;  margin-bottom: 20px;">Back</a>
+    </div>
+    @Html.ValidationSummary()
+</form>
+
+
+@if (TempData.ContainsKey("SuccessMessage"))
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const timeSlotBoxes = document.querySelectorAll(".time-slot-box");
+        const searchButton = document.getElementById("searchButton");
+        const selectedDateTimeInput = document.getElementById("selectedDateTime");
+
+        timeSlotBoxes.forEach(box => {
+            box.addEventListener("click", function () {
+                timeSlotBoxes.forEach(b => b.classList.remove("selected"));
+                this.classList.add("selected");
+                searchButton.disabled = false;
+                selectedDateTimeInput.value = this.dataset.time;
+            });
+        });
+        selectedDoctorIdInput.value = "@Model.DoctorId";
+    });
+</script>
+<style>
+    #dateTimeSelection {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .date-time-box-container {
+        margin: 10px;
+    }
+
+    .time-slot-boxes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .time-slot-box {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+        .time-slot-box.selected {
+            background-color: #a0a0a0;
+        }
+
+    #selectedDateTime {
+        display: none;
+    }
+
+    #searchButton {
+        margin-top: 10px;
+        font-size: 16px;
+        background-color: lightblue;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+</style>
+

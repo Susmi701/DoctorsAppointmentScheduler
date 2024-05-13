@@ -1,0 +1,62 @@
+﻿
+@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "DoctorsIndex";
+}
+@{
+    ViewData["Title"] = "Patient Profile";
+}
+@model IEnumerable<DoctorsAppointmentScheduler.DTO.CountDTO>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Patient</th>
+            <th>Phonenumber</th>
+            <th>Appointment Count</th>            
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="5">No records found</td>
+            </tr>
+        }
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>@appointment.Name</td>
+                <td> @appointment.PhoneNumber</td>                
+                <th>@appointment.Count</th>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th {
+        background-color: #f2f2f2;
+        padding: 8px;
+        text-align: left;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+    } 
+        td:first-child {
+            font-weight: 500;
+        }
+
+</style>

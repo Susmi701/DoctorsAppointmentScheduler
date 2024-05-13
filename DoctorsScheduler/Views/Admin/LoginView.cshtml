@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "AdminIndex";
+}
+@model DoctorsAppointmentScheduler.DTO.AuthenticationDTO
+@{
+    ViewData["Title"] = "Doctor Registered";
+}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <th>Username</th>
+                    <td>
+                        <span class="copy-container">
+                            @Model.Username
+                            <button class="btn btn-link copy-username text-primary" data-clipboard-text="@Model.Username" data-clipboard-target="#username" title="Copy Username">
+                                <img src="https://cdn.iconscout.com/icon/free/png-512/free-copy-2652889-2202806.png" alt="Copy Icon" class="copy-icon"  width="24" height="24">
+                           
+                            </button>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td>
+                        <span class="copy-container">
+                            @Model.Password
+                            <button class="btn btn-link copy-password text-primary" data-clipboard-text="@Model.Password" data-clipboard-target="#password" title="Copy Password">
+                                <img src="https://cdn.iconscout.com/icon/free/png-512/free-copy-2652889-2202806.png" alt="Copy Icon" class="copy-icon" width="24" height="24">
+                            </button>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="btn-container mt-3">
+        <button onclick="location.href='@Url.Action("Index", "Admin")'" class="btn btn-primary">Done</button>
+    </div>
+</div>
+<div style="display: none;">
+    <span id="username">@Model.Username</span>
+    <span id="password">@Model.Password</span>
+</div>
+@if (TempData["SuccessMessageForRegisterDoctor"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessageForRegisterDoctor"]
+    </div>
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+
+    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('ClipboardJS initialized');
+        var clipboardUsername = new ClipboardJS('.copy-username');
+        var clipboardPassword = new ClipboardJS('.copy-password');
+     
+     
+    });
+    setTimeout(function () {
+        $('.alert').fadeOut('slow');
+    }, 3000);
+</script>

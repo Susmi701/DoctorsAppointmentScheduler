@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "HomeIndex";
+}
+@{
+    ViewData["Title"] = "Login";
+}
+@model DoctorsAppointmentScheduler.DTO.AuthenticationDTO 
+<section >
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6" style="background-color: white;">
+              <div class="card-body p-md-5 mx-md-4">
+                  <form asp-action="PatientLogin" asp-controller="Home" method="post" form-validation="true">
+                                <div class="text-center">
+                                    <h1>Login</h1>
+                                </div>
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <label asp-for="Username"></label>
+                                        <input asp-for="Username" class="form-control" />
+                                        <span asp-validation-for="Username" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <label asp-for="Password"></label>
+                                        <input asp-for="Password" type="password" class="form-control" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                     <div class="text-center pt-1 pb-1">
+                                        <button id="loginButton" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" >
+                                            Log in
+                                        </button>
+                                    </div>                                     
+                  </form>
+                            <div class="alerts-container">
+                                @if (TempData.ContainsKey("ErrorMessageLogin"))
+                                {
+                                    <div class="alert alert-danger">
+                                        @TempData["ErrorMessageLogin"]
+                                    </div>
+                                }
+                                @if (TempData.ContainsKey("SuccessMessageReset"))
+                                {
+                                    <div class="alert alert-success">
+                                        @TempData["SuccessMessageReset"]
+                                    </div>
+                                }
+                                @if (TempData.ContainsKey("SuccessMessageForRegisterPatient"))
+                                {
+                                    <div class="alert alert-success">
+                                        @TempData["SuccessMessageForRegisterPatient"]
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="mt-3">
+                        <a asp-action="PatientForgotPassword" asp-controller="Home" class="text-muted">Forgot password?</a>
+                    </div>
+
+                    <div  class="d-flex align-items-center justify-content-center pb-4">
+                               <p class="mb-0 me-2">Don't have an account?</p>
+                           <button onclick="window.location.href='@Url.Action("RegisterPatient", "Home")'" class="btn btn-outline-danger">Create new</button>
+                    </div>
+                           
+                        </div>
+            </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+   
+</section>
+<script>
+    setTimeout(function () {
+        $('.alert').fadeOut('slow');
+    }, 3000);
+   
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

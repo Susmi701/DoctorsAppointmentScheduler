@@ -1,0 +1,83 @@
+﻿
+@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "DoctorsIndex";
+}
+@{
+    ViewData["Title"] = "Request";
+}
+@model IEnumerable<DoctorsAppointmentScheduler.DTO.AppointmentHistoryDTO>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request Details</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .request-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            .request-table th,
+            .request-table td {
+                border: 1px solid #ccc;
+                padding: 8px;
+                text-align: left;
+            }
+
+            .request-table th {
+                background-color: #f2f2f2;
+            }
+
+            .request-table button {
+                margin-top: 5px;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Request Details</h1>
+        <table class="request-table">
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Appointment Date</th>
+                    <th>TimeSlot</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="5">No records found</td>
+                    </tr>
+                }
+                @foreach (var request in Model)
+                {
+                    <tr>
+                        <td>@request.PatientName</td>
+                        <td>@request.Selected_Date.ToString("yyyy-MM-dd")</td>
+                        <td>@request.TimeSlot.ToString("HH:mm")</td>
+                        <td>
+                            <form asp-action="UpdateBookingStatus" asp-controller="Doctor" method="post">
+                                <input type="hidden" name="appointmentId" value="@request.AppointmentId" />
+                                <button type="submit" class="btn btn-primary">Accept</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

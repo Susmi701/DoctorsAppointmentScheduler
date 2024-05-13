@@ -1,0 +1,81 @@
+﻿@model DoctorsAppointmentScheduler.DTO.MedicalStaffDTO
+@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "AdminIndex";
+}
+@{
+    ViewData["Title"] = "Edit Doctor";
+}
+<h1>Edit Profile</h1>
+
+<form asp-action="EditDoctor" asp-controller="Admin" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" name="id" value="@ViewBag.id" />
+
+    <label>Select Categories:</label>
+    <select asp-for="SpecialityId" asp-items="@((SelectList)ViewData["CategoryList"])" ></select>
+    <span asp-validation-for="SpecialityId" class="text-danger"></span>
+    <div class="form-group">
+        <label asp-for="FirstName" class="control-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MiddleName" class="control-label"></label>
+        <input asp-for="MiddleName" class="form-control" />
+        <span asp-validation-for="MiddleName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DOB" class="control-label"></label>
+        <input asp-for="DOB" class="form-control" value="@Model.DOB.ToString("yyyy-MM-dd")" type="date" />
+        <span asp-validation-for="DOB" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address" class="control-label"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber" class="control-label"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group mt-3">
+        <input type="submit" value="Edit" class="btn btn-primary" />
+        <button type="button" class="btn btn-light" style="margin-right: 10px;" href="#" onclick="window.history.back()">Back</button>
+    </div>
+</form>
+
+@if (TempData.ContainsKey("ErrorMessageForEditingDoctor"))
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessageForEditingDoctor"]
+    </div>
+}
+@if (TempData.ContainsKey("SuccessMessageForEditingDoctor"))
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessageForEditingDoctor"]
+    </div>
+}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script>
+    setTimeout(function () {
+        $('.alert').fadeOut('slow');
+    }, 3000);
+</script>

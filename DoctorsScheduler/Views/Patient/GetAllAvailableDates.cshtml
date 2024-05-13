@@ -1,0 +1,91 @@
+﻿@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "PatientIndex";
+}
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+@model DoctorsAppointmentScheduler.DTO.AvailableDateDTO 
+
+<form asp-action="GetAllAvailableTimeSlot" asp-controller="Patient" method="get">
+    <input type="hidden" id="doctorId" name="doctorId" value="@Model.DoctorId" />
+    <div id="dateSelection" style="display: flex; flex-wrap: wrap;">
+        @if (Model.Date.Count() == 0)
+        {
+            <tr>
+                <td colspan="5">No records found</td>
+            </tr>
+        }
+        @foreach (var date in Model.Date)
+        {
+            <div class="date-box-container">
+                <div class="date-box" data-date="@date.ToString("yyyy-MM-dd")">@date.ToShortDateString()</div>
+            </div>
+        }
+        <input type="hidden" id="selectedDate" name="selectedDate" />
+       
+    </div>
+    <button type="submit" id="searchButton" disabled>Search</button>
+    <a type="button" class="btn btn-light" href="@Url.Action("GetSpeciality", "Patient")" style="display:inline">Back</a>
+</form>
+@if (TempData.ContainsKey("ErrorMessageForBooking"))
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessageForBooking"]
+    </div>
+}
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dateBoxes = document.querySelectorAll(".date-box");
+        const searchButton = document.getElementById("searchButton");
+        const selectedDateInput = document.getElementById("selectedDate");
+
+        dateBoxes.forEach(box => {
+            box.addEventListener("click", function () {
+                dateBoxes.forEach(b => b.classList.remove("selected"));
+                this.classList.add("selected");
+                searchButton.disabled = false; 
+                selectedDateInput.value = this.dataset.date; 
+            });
+        });
+        selectedDoctorIdInput.value = "@Model.DoctorId";
+    });
+    setTimeout(function () {
+        $('.alert').fadeOut('slow');
+    }, 3000);
+</script>
+
+<style>
+    .date-box-container {
+        width: 100px;
+        margin: 5px; 
+    }
+
+    .date-box {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+        .date-box.selected {
+            background-color: #f0f0f0;           
+        }
+
+    #searchButton {
+        margin-top: 10px;
+        font-size: 16px; 
+        background-color: lightblue;
+        
+        padding: 12px 20px;
+        border: none; 
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+</style>

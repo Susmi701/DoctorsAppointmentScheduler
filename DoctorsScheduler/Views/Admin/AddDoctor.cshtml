@@ -1,0 +1,88 @@
+﻿@using Microsoft.AspNetCore.Mvc
+@{
+    Layout = "AdminIndex";
+}
+@{
+    ViewData["Title"] = "Doctor Registration";
+}
+@model DoctorRegistrationViewModel
+<div class="card text-black" style="border-radius: 15px;">
+    <div class="card-body p-md-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-5 col-xl-4 order-2  order-lg-1">
+
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                <form asp-action="RegisterDoctor" asp-controller="Admin" method="post" class="mx-1 mx-md-4">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select asp-for="MedicalStaff.SpecialityId" id="doctorSearch" class="form-control" onchange="mapSpecialityToMedicalStaff(this)" data-val="true" data-val-required="Please select a speciality..." >
+                                <option value="" selected disabled>Select a Speciality...</option>
+                                @foreach (var speciality in Model.Specialities)
+                                {
+                                    <option value="@speciality.Id">@speciality.Speciality</option>
+                                }
+                            </select>
+                          
+                        </div>
+                        <span asp-validation-for="MedicalStaff.SpecialityId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="MedicalStaff.FirstName" class="form-label" for="form3Example1c">First Name:</label>
+                        <input asp-for="MedicalStaff.FirstName" type="text" id="form3Example1c" class="form-control" />
+                        <span asp-validation-for="MedicalStaff.FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-outline flex-fill mb-3">
+                        <label asp-for="MedicalStaff.MiddleName" class="form-label" for="form3Example1c">Middle Name:</label>
+                        <input asp-for="MedicalStaff.MiddleName" type="text" id="form3Example1c" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="MedicalStaff.LastName" class="form-label" for="form3Example1c">Last Name:</label>
+                        <input asp-for="MedicalStaff.LastName" type="text" id="form3Example1c" class="form-control"  />
+                        <span asp-validation-for="MedicalStaff.LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MedicalStaff.DOB" class="control-label">Date of Birth:</label>
+                        <input asp-for="MedicalStaff.DOB" type="date" class="form-control"   />
+                        <span asp-validation-for="MedicalStaff.DOB" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MedicalStaff.Address" class="control-label">Address:</label>
+                        <input asp-for="MedicalStaff.Address" type="text" class="form-control" />
+                        <span asp-validation-for="MedicalStaff.Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MedicalStaff.PhoneNumber" class="control-label">Phone Number:</label>
+                        <input asp-for="MedicalStaff.PhoneNumber" type="tel" class="form-control" />
+                        <span asp-validation-for="MedicalStaff.PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="MedicalStaff.Email" class="control-label">Email:</label>
+                        <input asp-for="MedicalStaff.Email" type="email" class="form-control" />
+                        <span asp-validation-for="MedicalStaff.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class=" form-group mt-3">
+                        <input type="submit" value="Add Doctor" class="btn btn-primary" />
+                    </div>
+                  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
