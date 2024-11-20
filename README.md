@@ -2,12 +2,12 @@ Doctors' Appointment Scheduler
 ----------------------------------
 This project aims to develop a web application that facilitates the scheduling of doctor appointments.
 
-Key Features:
- Hospital Administrator login.
- Doctor login and profile edit.
- Patient registration, login and profile edit.
- Appointment request submission by patients
- Appointment approval/rejection by doctors
+Key Features:<br />
+ Hospital Administrator login.<br />
+ Doctor login and profile edit..<br />
+ Patient registration, login and profile edit..<br />
+ Appointment request submission by patients.<br />
+ Appointment approval/rejection by doctors.<br />
 
 Actors in the Application
 ----------------------------
